@@ -44,6 +44,12 @@ namespace GameProgramm_v_1._0
             }
         }
 
+        private void SetAllPrep()
+        {
+            var barrirs = new Barrier();
+            var barrirsArray = barrirs.GetBarrier_Level1();
+        }
+
         private void SetMasImage(PictureBox[,] pictureBoxes)
         {
             int i = pictureBoxes.GetLength(0)-1, j = pictureBoxes.GetLength(1)-1;
