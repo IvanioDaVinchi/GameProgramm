@@ -12,7 +12,7 @@ namespace GameProgramm_v_1._0
         int Y;
         public Barrier[] GetBarrier_Level1()
         {
-            Barrier[] barriersArray;
+            Barrier[] barriersArray= new Barrier[2];
             string barriers = FileClass.GetTextFromFile(FileClass.path_for_Level_1);
             return barriersArray;
         }
