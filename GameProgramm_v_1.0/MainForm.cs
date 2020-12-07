@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace GameProgramm_v_1._0
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void SettingButton_Click(object sender, EventArgs e)
+        {
+            SettingForm settingForm = new SettingForm();
+            settingForm.Show();
+            this.Hide();
         }
     }
 }
