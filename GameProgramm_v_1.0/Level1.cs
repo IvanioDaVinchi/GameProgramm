@@ -13,10 +13,14 @@ namespace GameProgramm_v_1._0
 {
     public partial class Level1 : Form
     {
+        Character character;
         PictureBox[,] pictureBoxes = new PictureBox[6, 6];
         public Level1()
         {
             InitializeComponent();
+            SetMasImage(pictureBoxes);
+            SetAllPictures("пчел");
+            character = new Character(pictureBoxes);
         }
 
         private void Level1_Load(object sender, EventArgs e)
@@ -26,12 +30,23 @@ namespace GameProgramm_v_1._0
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SetMasImage();
         }
 
-        private void SetMasImage()
+        private void SetAllPictures(string picName)
         {
-            int i = 5, j = 5;
+            for (int i = 0; i < pictureBoxes.GetLength(0); i++)
+            {
+                for (int j = 0; j < pictureBoxes.GetLength(1); j++)
+                {
+                    pictureBoxes[i, j].SizeMode = PictureBoxSizeMode.StretchImage;
+                    pictureBoxes[i, j].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\{picName}.jpg");
+                }
+            }
+        }
+
+        private void SetMasImage(PictureBox[,] pictureBoxes)
+        {
+            int i = pictureBoxes.GetLength(0)-1, j = pictureBoxes.GetLength(1)-1;
             List<PictureBox> list = new List<PictureBox>();
             foreach (PictureBox item in Controls.OfType<PictureBox>())
             {
@@ -46,7 +61,7 @@ namespace GameProgramm_v_1._0
                 pictureBoxes[i, j] = item;
                 if (j <= 0)
                 {
-                    j = 5;
+                    j = pictureBoxes.GetLength(1) - 1;
                     i--;
                 }
                 else
@@ -54,13 +69,38 @@ namespace GameProgramm_v_1._0
                     j--;
                 }
             }
+        }
 
-            for (i = 0; i < pictureBoxes.GetLength(0); i++)
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Level1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.ToUpper(e.KeyChar)==(char)Keys.D)
             {
-                for (j = 0; j < pictureBoxes.GetLength(1); j++)
+                character.Right();
+            }
+            else
+            {
+                if (char.ToUpper(e.KeyChar) == (char)Keys.A)
                 {
-                    pictureBoxes[i, j].SizeMode = PictureBoxSizeMode.StretchImage;
-                    pictureBoxes[i, j].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
+                    character.Left();
+                }
+                else
+                {
+                    if (char.ToUpper(e.KeyChar) == (char)Keys.W)
+                    {
+                        character.Up();
+                    }
+                    else
+                    {
+                        if (char.ToUpper(e.KeyChar) == (char)Keys.S)
+                        {
+                            character.Down();
+                        }
+                    }
                 }
             }
         }
