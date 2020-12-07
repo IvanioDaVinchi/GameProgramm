@@ -26,12 +26,12 @@ namespace GameProgramm_v_1._0
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SetMasImage();
+            SetMasImage(pictureBoxes);
         }
 
-        private void SetMasImage()
+        private void SetMasImage(PictureBox[,] pictureBoxes)
         {
-            int i = 5, j = 5;
+            int i = pictureBoxes.GetLength(0), j = pictureBoxes.GetLength(1);
             List<PictureBox> list = new List<PictureBox>();
             foreach (PictureBox item in Controls.OfType<PictureBox>())
             {
