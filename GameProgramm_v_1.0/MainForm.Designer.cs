@@ -34,7 +34,7 @@
             // 
             // SettingButton
             // 
-            this.SettingButton.BackColor = System.Drawing.SystemColors.Desktop;
+            this.SettingButton.BackColor = System.Drawing.Color.MediumPurple;
             this.SettingButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SettingButton.ForeColor = System.Drawing.SystemColors.InfoText;
             this.SettingButton.Location = new System.Drawing.Point(12, 12);
@@ -47,7 +47,7 @@
             // 
             // PlayButton
             // 
-            this.PlayButton.BackColor = System.Drawing.SystemColors.Desktop;
+            this.PlayButton.BackColor = System.Drawing.Color.MediumPurple;
             this.PlayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PlayButton.Location = new System.Drawing.Point(495, 12);
             this.PlayButton.Name = "PlayButton";
