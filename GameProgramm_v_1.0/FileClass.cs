@@ -15,10 +15,6 @@ namespace GameProgramm_v_1._0
         public static string GetTextFromFile(string path)
         {
             string text = "";
-            while()
-            {
-
-            }
             text = File.ReadAllText(path);
             return text;
         }
