@@ -10,10 +10,11 @@ using System.Windows.Forms;
 
 namespace GameProgramm_v_1._0
 {
-    class Character
+    public class Character
     {
         public int col=0;
         public int row=0;
+        public int life=1;
         PictureBox[,] pictureBoxes;
 
         public Character(PictureBox[,] pictureBoxes)
@@ -25,17 +26,7 @@ namespace GameProgramm_v_1._0
         public void Right()
         {
 
-            if (row != pictureBoxes.GetLength(1)-1)
-            {
-                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
-                row++;
-                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
-            }
-        }
-
-        public void Down()
-        {
-            if (col != pictureBoxes.GetLength(0) - 1)
+            if (col != pictureBoxes.GetLength(1)-1)
             {
                 pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
                 col++;
@@ -43,7 +34,27 @@ namespace GameProgramm_v_1._0
             }
         }
 
+        public void Down()
+        {
+            if (row != pictureBoxes.GetLength(0) - 1)
+            {
+                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
+                row++;
+                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
+            }
+        }
+
         public void Left()
+        {
+            if (col!=0)
+            {
+                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
+                col--;
+                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
+            }
+        }
+
+        public void Up()
         {
             if (row!=0)
             {
@@ -53,14 +64,15 @@ namespace GameProgramm_v_1._0
             }
         }
 
-        public void Up()
+        public void Dead()
         {
-            if (col!=0)
-            {
-                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
-                col--;
-                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
-            }
+            life--;
+            pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
+            row = 0;
+            col = 0;
+            pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
+            Bot.Restart();
+            MessageBox.Show("Вы умерли.");
         }
     }
 }
