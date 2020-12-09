@@ -17,7 +17,6 @@ namespace GameProgramm_v_1._0
         PictureBox[,] pictureBoxes = new PictureBox[6, 6];
         Barrier[] barriersArray;
         int counter = 0;
-        Random random;
         public Level1()
         {
             InitializeComponent();
@@ -108,7 +107,13 @@ namespace GameProgramm_v_1._0
                 }
                 if (hodit == true)
                 {
+                    counter++;
                     character.Right();
+                    if (counter == 6)
+                    {
+                        RandBonus(pictureBoxes);
+                        counter = 0;
+                    }
                 }
             }
             else
@@ -124,7 +129,13 @@ namespace GameProgramm_v_1._0
                     }
                     if (hodit == true)
                     {
+                        counter++;
                         character.Left();
+                        if (counter==6)
+                        {
+                            RandBonus(pictureBoxes);
+                            counter = 0;
+                        }
                     }
                 }
                 else
@@ -140,7 +151,13 @@ namespace GameProgramm_v_1._0
                         }
                         if (hodit == true)
                         {
+                            counter++;
                             character.Up();
+                            if (counter == 6)
+                            {
+                                RandBonus(pictureBoxes);
+                                counter = 0;
+                            }
                         }
                     }
                     else
@@ -157,7 +174,14 @@ namespace GameProgramm_v_1._0
                             }
                             if (hodit == true)
                             {
+                                counter++;
                                 character.Down();
+                                counter++;
+                                if (counter == 6)
+                                {
+                                    RandBonus(pictureBoxes);
+                                    counter = 0;
+                                }
                             }
                         }
                         
@@ -169,6 +193,24 @@ namespace GameProgramm_v_1._0
             {
                 MessageBox.Show("Поздровляю вы прошли уровень!!!");
             }
+        }
+
+        private void RandBonus(PictureBox[,] pictureBoxes)
+        {
+            Random random=new Random();
+            int x = random.Next(0, pictureBoxes.GetLength(0) - 1);
+            int y = random.Next(0, pictureBoxes.GetLength(1) - 1);
+
+            foreach (var item in barriersArray)
+            {
+                while (x == item.X && y == item.Y)
+                {
+                        x = random.Next(0, pictureBoxes.GetLength(0) - 1);
+                        y = random.Next(0, pictureBoxes.GetLength(1) - 1);
+                }
+            }
+
+            pictureBoxes[x, y].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bonus.jpg");
         }
 
         private void button1_Click_1(object sender, EventArgs e)

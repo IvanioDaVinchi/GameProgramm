@@ -24,6 +24,11 @@ namespace GameProgramm_v_1._0
             pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
         }
 
+        public void picupBonus()
+        {
+
+        }
+
         public void Right()
         {
 
