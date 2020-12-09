@@ -8,18 +8,19 @@ namespace GameProgramm_v_1._0
 {
     public class Barrier
     {
-        public int X;
-        public int Y;
+        public int X = 0;
+        public int Y = 0;
         public Barrier[] GetBarrier_Level1()
         {
             string barrier = FileClass.GetTextFromFile(FileClass.path_for_Level_1);
             string[] barriers = barrier.Split('\n');
             Barrier[] barriersArray = new Barrier[barriers.Length];
-            for(int i = 0; i < barriersArray.Length; i++)
+            for (int i = 0; i < barriersArray.Length; i++)
             {
+                barriersArray[i] = new Barrier();
                 string str = barriers[i];
                 barriersArray[i].X = Convert.ToInt32(Convert.ToString(str[0]));
-                barriersArray[i].Y = Convert.ToInt32(Convert.ToString(str[3]));
+                barriersArray[i].Y = Convert.ToInt32(Convert.ToString(str[2]));
             }
             return barriersArray;
         }
@@ -30,9 +31,10 @@ namespace GameProgramm_v_1._0
             Barrier[] barriersArray = new Barrier[barriers.Length];
             for (int i = 0; i < barriersArray.Length; i++)
             {
+                barriersArray[i] = new Barrier();
                 string str = barriers[i];
                 barriersArray[i].X = Convert.ToInt32(Convert.ToString(str[0]));
-                barriersArray[i].Y = Convert.ToInt32(Convert.ToString(str[3]));
+                barriersArray[i].Y = Convert.ToInt32(Convert.ToString(str[2]));
             }
             return barriersArray;
         }
@@ -43,9 +45,10 @@ namespace GameProgramm_v_1._0
             Barrier[] barriersArray = new Barrier[barriers.Length];
             for (int i = 0; i < barriersArray.Length; i++)
             {
+                barriersArray[i] = new Barrier();
                 string str = barriers[i];
                 barriersArray[i].X = Convert.ToInt32(Convert.ToString(str[0]));
-                barriersArray[i].Y = Convert.ToInt32(Convert.ToString(str[3]));
+                barriersArray[i].Y = Convert.ToInt32(Convert.ToString(str[2]));
             }
             return barriersArray;
         }
