@@ -16,6 +16,7 @@ namespace GameProgramm_v_1._0
         public int row=0;
         public int life=1;
         PictureBox[,] pictureBoxes;
+        public string PathTexture { get; set; }
 
         public Character(PictureBox[,] pictureBoxes)
         {
