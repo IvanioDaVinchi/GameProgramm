@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace GameProgramm_v_1._0
 {
@@ -16,6 +17,8 @@ namespace GameProgramm_v_1._0
         Character character;
         PictureBox[,] pictureBoxes = new PictureBox[6, 6];
         Barrier[] barriersArray;
+        Bonus bonus = new Bonus();
+        Random random = new Random();
         int counter = 0;
         public Level1()
         {
@@ -30,7 +33,7 @@ namespace GameProgramm_v_1._0
 
         private void Level1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,8 +46,8 @@ namespace GameProgramm_v_1._0
             {
                 for (int j = 0; j < pictureBoxes.GetLength(1); j++)
                 {
-                        pictureBoxes[i, j].SizeMode = PictureBoxSizeMode.StretchImage;
-                        pictureBoxes[i, j].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\{picName}.jpg");
+                    pictureBoxes[i, j].SizeMode = PictureBoxSizeMode.StretchImage;
+                    pictureBoxes[i, j].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\{picName}.jpg");
                 }
             }
             pictureBoxes[5, 5].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\exit.jpg");
@@ -62,7 +65,7 @@ namespace GameProgramm_v_1._0
 
         private void SetMasImage(PictureBox[,] pictureBoxes)
         {
-            int i = pictureBoxes.GetLength(0)-1, j = pictureBoxes.GetLength(1)-1;
+            int i = pictureBoxes.GetLength(0) - 1, j = pictureBoxes.GetLength(1) - 1;
             List<PictureBox> list = new List<PictureBox>();
             foreach (PictureBox item in Controls.OfType<PictureBox>())
             {
@@ -91,11 +94,11 @@ namespace GameProgramm_v_1._0
         {
 
         }
-       
+
         private void Level1_KeyPress(object sender, KeyPressEventArgs e)
         {
             bool hodit = true;
-            
+
             if (char.ToUpper(e.KeyChar) == (char)Keys.D)
             {
                 foreach (var item in barriersArray)
@@ -107,8 +110,17 @@ namespace GameProgramm_v_1._0
                 }
                 if (hodit == true)
                 {
-                    counter++;
+                    if (bonus.exist == false)
+                    {
+                        counter++;
+                    }
                     character.Right();
+                    if (character.row == bonus.x && character.col == bonus.y)
+                    {
+                        bonus.exist = false;
+                        timer1.Stop();
+                        timer2.Start();
+                    }
                     if (counter == 6)
                     {
                         RandBonus(pictureBoxes);
@@ -122,16 +134,25 @@ namespace GameProgramm_v_1._0
                 {
                     foreach (var item in barriersArray)
                     {
-                        if (character.col - 1 == item.Y && character.row==item.X)
+                        if (character.col - 1 == item.Y && character.row == item.X)
                         {
                             hodit = false;
                         }
                     }
                     if (hodit == true)
                     {
-                        counter++;
+                        if (bonus.exist == false)
+                        {
+                            counter++;
+                        }
                         character.Left();
-                        if (counter==6)
+                        if (character.row == bonus.x && character.col == bonus.y)
+                        {
+                            bonus.exist = false;
+                            timer1.Stop();
+                            timer2.Start();
+                        }
+                        if (counter == 6)
                         {
                             RandBonus(pictureBoxes);
                             counter = 0;
@@ -144,15 +165,24 @@ namespace GameProgramm_v_1._0
                     {
                         foreach (var item in barriersArray)
                         {
-                            if (character.row - 1 == item.X && character.col==item.Y)
+                            if (character.row - 1 == item.X && character.col == item.Y)
                             {
                                 hodit = false;
                             }
                         }
                         if (hodit == true)
                         {
-                            counter++;
+                            if (bonus.exist == false)
+                            {
+                                counter++;
+                            }
                             character.Up();
+                            if (character.row == bonus.x && character.col == bonus.y)
+                            {
+                                bonus.exist = false;
+                                timer1.Stop();
+                                timer2.Start();
+                            }
                             if (counter == 6)
                             {
                                 RandBonus(pictureBoxes);
@@ -167,16 +197,24 @@ namespace GameProgramm_v_1._0
 
                             foreach (var item in barriersArray)
                             {
-                                if (character.row + 1 == item.X && character.col==item.Y)
+                                if (character.row + 1 == item.X && character.col == item.Y)
                                 {
                                     hodit = false;
                                 }
                             }
                             if (hodit == true)
                             {
-                                counter++;
+                                if (bonus.exist==false)
+                                {
+                                    counter++;
+                                }
                                 character.Down();
-                                counter++;
+                                if (character.row == bonus.x && character.col == bonus.y)
+                                {
+                                    bonus.exist = false;
+                                    timer1.Stop();
+                                    timer2.Start();
+                                }
                                 if (counter == 6)
                                 {
                                     RandBonus(pictureBoxes);
@@ -184,9 +222,9 @@ namespace GameProgramm_v_1._0
                                 }
                             }
                         }
-                        
+
                     }
-                    
+
                 }
             }
             if (character.row == 5 && character.col == 5)
@@ -197,20 +235,42 @@ namespace GameProgramm_v_1._0
 
         private void RandBonus(PictureBox[,] pictureBoxes)
         {
-            Random random=new Random();
-            int x = random.Next(0, pictureBoxes.GetLength(0) - 1);
-            int y = random.Next(0, pictureBoxes.GetLength(1) - 1);
-
-            foreach (var item in barriersArray)
+            if (bonus.exist == false)
             {
-                while (x == item.X && y == item.Y)
-                {
-                        x = random.Next(0, pictureBoxes.GetLength(0) - 1);
-                        y = random.Next(0, pictureBoxes.GetLength(1) - 1);
-                }
-            }
+                bool proxod = false;
+                int counter = 0;
 
-            pictureBoxes[x, y].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bonus.jpg");
+                while (proxod == false)
+                {
+                    bonus.x = random.Next(0, pictureBoxes.GetLength(0) - 1);
+                    bonus.y = random.Next(0, pictureBoxes.GetLength(1) - 1);
+
+                    foreach (var item in barriersArray)
+                    {
+                        if (bonus.x == item.X && bonus.y == item.Y)
+                        {
+                            counter++;
+                        }
+                    }
+
+                    if (bonus.x == Bot.row && bonus.y == Bot.col)
+                    {
+                        counter++;
+                    }
+
+                    if (counter == 0)
+                    {
+                        proxod = true;
+                    }
+                    else
+                    {
+                        counter = 0;
+                    }
+                }
+
+                pictureBoxes[bonus.x, bonus.y].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bonus.jpg");
+                bonus.exist = true;
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -219,21 +279,27 @@ namespace GameProgramm_v_1._0
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Bot.Move(character.col,barriersArray);
+            Bot.Move(character.col, barriersArray);
             if (Bot.col == character.col && Bot.row == character.row)
             {
                 character.Dead();
-                if (character.life==0)
+                if (character.life == 0)
                 {
                     MessageBox.Show("Вы проиграли");
                     this.Close();
                 }
             }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            timer1.Start();
+            timer2.Stop();
         }
     }
 }

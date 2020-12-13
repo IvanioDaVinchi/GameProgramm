@@ -25,41 +25,39 @@ namespace GameProgramm_v_1._0
         {
             pictureBoxes = pictureBoxes1;
             row = pictureBoxes.GetLength(0) - 2;
-            pictureBoxes[pictureBoxes.GetLength(0)- 2, 0].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
+            pictureBoxes[pictureBoxes.GetLength(0) - 2, 0].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
         }
 
-        static public void Move(int col1,Barrier[] barriers)
+        static public void Move(int playerX, Barrier[] barriers)
         {
-            bool hodit=true;
+            bool hodit = true;
 
-            if (col != pictureBoxes.GetLength(1) - 1)
+            if (col != playerX)
             {
-                if (col < col1)
-                {
-                    pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
-                    col++;
-                    foreach (var item in barriers)
+                    if (col < playerX)
                     {
-                        if (row == item.X && col == item.Y)
+                        pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
+                        col++;
+                        foreach (var item in barriers)
                         {
-                            hodit = false;
+                            if (row == item.X && col == item.Y)
+                            {
+                                hodit = false;
+                            }
                         }
-                    }
-                    if (hodit==true)
-                    {
-                        pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
+                        if (hodit == true)
+                        {
+                            pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
+                        }
+                        else
+                        {
+                            col--;
+                            pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
+                        }
                     }
                     else
                     {
-                            col--;
-                        pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
-                    }
-                }
-                else
-                {
-                    pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
-                    if (col!=col1)
-                    {
+                        pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
                         col--;
                     }
                     foreach (var item in barriers)
@@ -78,8 +76,13 @@ namespace GameProgramm_v_1._0
                         col++;
                         pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
                     }
-                }
+                
             }
         }
     }
 }
+
+
+
+
+
