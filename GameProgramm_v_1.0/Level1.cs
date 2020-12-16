@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
-using System.Runtime.CompilerServices;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace GameProgramm_v_1._0
 {
@@ -19,7 +14,6 @@ namespace GameProgramm_v_1._0
         Barrier[] barriersArray;
         Bonus bonus = new Bonus();
         Random random = new Random();
-        int counter = 0;
         public Level1()
         {
             InitializeComponent();
@@ -97,132 +91,30 @@ namespace GameProgramm_v_1._0
 
         private void Level1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            bool hodit = true;
-
             if (char.ToUpper(e.KeyChar) == (char)Keys.D)
             {
-                foreach (var item in barriersArray)
-                {
-                    if (character.row == item.X && character.col + 1 == item.Y)
-                    {
-                        hodit = false;
-                    }
-                }
-                if (hodit == true)
-                {
-                    if (bonus.exist == false)
-                    {
-                        counter++;
-                    }
-                    character.Right();
-                    if (character.row == bonus.x && character.col == bonus.y)
-                    {
-                        bonus.exist = false;
-                        timer1.Stop();
-                        timer2.Start();
-                    }
-                    if (counter == 6)
-                    {
-                        RandBonus(pictureBoxes);
-                        counter = 0;
-                    }
-                }
+
+                character.HoditRight(barriersArray, bonus, timer1, timer2, RandBonus);
             }
             else
             {
                 if (char.ToUpper(e.KeyChar) == (char)Keys.A)
                 {
-                    foreach (var item in barriersArray)
-                    {
-                        if (character.col - 1 == item.Y && character.row == item.X)
-                        {
-                            hodit = false;
-                        }
-                    }
-                    if (hodit == true)
-                    {
-                        if (bonus.exist == false)
-                        {
-                            counter++;
-                        }
-                        character.Left();
-                        if (character.row == bonus.x && character.col == bonus.y)
-                        {
-                            bonus.exist = false;
-                            timer1.Stop();
-                            timer2.Start();
-                        }
-                        if (counter == 6)
-                        {
-                            RandBonus(pictureBoxes);
-                            counter = 0;
-                        }
-                    }
+                    character.HoditLeft(barriersArray, bonus, timer1, timer2, RandBonus);
                 }
                 else
                 {
                     if (char.ToUpper(e.KeyChar) == (char)Keys.W)
                     {
-                        foreach (var item in barriersArray)
-                        {
-                            if (character.row - 1 == item.X && character.col == item.Y)
-                            {
-                                hodit = false;
-                            }
-                        }
-                        if (hodit == true)
-                        {
-                            if (bonus.exist == false)
-                            {
-                                counter++;
-                            }
-                            character.Up();
-                            if (character.row == bonus.x && character.col == bonus.y)
-                            {
-                                bonus.exist = false;
-                                timer1.Stop();
-                                timer2.Start();
-                            }
-                            if (counter == 6)
-                            {
-                                RandBonus(pictureBoxes);
-                                counter = 0;
-                            }
-                        }
+                        character.HoditUp(barriersArray, bonus, timer1, timer2, RandBonus);
                     }
                     else
                     {
                         if (char.ToUpper(e.KeyChar) == (char)Keys.S)
                         {
 
-                            foreach (var item in barriersArray)
-                            {
-                                if (character.row + 1 == item.X && character.col == item.Y)
-                                {
-                                    hodit = false;
-                                }
-                            }
-                            if (hodit == true)
-                            {
-                                if (bonus.exist==false)
-                                {
-                                    counter++;
-                                }
-                                character.Down();
-                                if (character.row == bonus.x && character.col == bonus.y)
-                                {
-                                    bonus.exist = false;
-                                    timer1.Stop();
-                                    timer2.Start();
-                                }
-                                if (counter == 6)
-                                {
-                                    RandBonus(pictureBoxes);
-                                    counter = 0;
-                                }
-                            }
+                            character.HoditDown(barriersArray, bonus, timer1, timer2, RandBonus);
                         }
-
                     }
 
                 }

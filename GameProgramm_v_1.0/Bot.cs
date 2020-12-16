@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GameProgramm_v_1._0
@@ -33,33 +29,33 @@ namespace GameProgramm_v_1._0
             bool hodit = true;
 
             if (col != playerX)
-            {
-                    if (col < playerX)
+
+                if (col < playerX)
+                {
+                    pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
+                    col++;
+                    foreach (var item in barriers)
                     {
-                        pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
-                        col++;
-                        foreach (var item in barriers)
+                        if (row == item.X && col == item.Y)
                         {
-                            if (row == item.X && col == item.Y)
-                            {
-                                hodit = false;
-                            }
+                            hodit = false;
+                            break;
                         }
-                        if (hodit == true)
-                        {
-                            pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
-                        }
-                        else
-                        {
-                            col--;
-                            pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
-                        }
+                    }
+                    if (hodit == true)
+                    {
+                        pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
                     }
                     else
                     {
-                        pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
                         col--;
+                        pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
                     }
+                }
+                else
+                {
+                    pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
+                    col--;
                     foreach (var item in barriers)
                     {
                         if (row == item.X && col == item.Y)
@@ -76,11 +72,11 @@ namespace GameProgramm_v_1._0
                         col++;
                         pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
                     }
-                
-            }
+                }
         }
     }
 }
+
 
 
 

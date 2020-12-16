@@ -13,10 +13,21 @@ namespace GameProgramm_v_1._0
 {
     public partial class Level3 : Form
     {
+        Character character;
         PictureBox[,] pictureBoxes = new PictureBox[10, 10];
+        Barrier[] barriersArray;
+        Bonus bonus = new Bonus();
+        Random random = new Random();
+
         public Level3()
         {
             InitializeComponent();
+            SetMasImage(pictureBoxes);
+            SetAllPictures("пчел");
+            SetAllPrep(pictureBoxes);
+            character = new Character(pictureBoxes);
+            Bot.SetValues(pictureBoxes);
+            timer1.Start();
         }
         private void SetAllPictures(string picName)
         {
