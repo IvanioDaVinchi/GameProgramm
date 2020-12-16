@@ -72,7 +72,7 @@ namespace GameProgramm_v_1._0
             MessageBox.Show("Вы умерли.");
         }
 
-        public void HoditRight(Barrier[] barriersArray, Bonus bonus, Timer timer1, Timer timer2, Action<PictureBox[,]> RandBonus)
+        public void HoditRight(Barrier[] barriersArray, Bonus bonus, Timer timer1, Timer timer2, Action<PictureBox[,],Bot> RandBonus, Bot bot)
         {
             bool hodit = true;
             foreach (var item in barriersArray)
@@ -97,13 +97,13 @@ namespace GameProgramm_v_1._0
                 }
                 if (counter == 6)
                 {
-                    RandBonus(pictureBoxes);
+                    RandBonus(pictureBoxes, bot);
                     counter = 0;
                 }
             }
         }
 
-        public void HoditLeft(Barrier[] barriersArray, Bonus bonus, Timer timer1, Timer timer2, Action<PictureBox[,]> RandBonus)
+        public void HoditLeft(Barrier[] barriersArray, Bonus bonus, Timer timer1, Timer timer2, Action<PictureBox[,],Bot> RandBonus,Bot bot)
         {
             bool hodit = true;
             foreach (var item in barriersArray)
@@ -128,13 +128,13 @@ namespace GameProgramm_v_1._0
                 }
                 if (counter == 6)
                 {
-                    RandBonus(pictureBoxes);
+                    RandBonus(pictureBoxes, bot);
                     counter = 0;
                 }
             }
         }
 
-        public void HoditDown(Barrier[] barriersArray, Bonus bonus, Timer timer1, Timer timer2, Action<PictureBox[,]> RandBonus)
+        public void HoditDown(Barrier[] barriersArray, Bonus bonus, Timer timer1, Timer timer2, Action<PictureBox[,],Bot> RandBonus, Bot bot)
         {
             bool hodit = true;
             foreach (var item in barriersArray)
@@ -159,13 +159,13 @@ namespace GameProgramm_v_1._0
                 }
                 if (counter == 6)
                 {
-                    RandBonus(pictureBoxes);
+                    RandBonus(pictureBoxes, bot);
                     counter = 0;
                 }
             }
         }
 
-        public void HoditUp(Barrier[] barriersArray, Bonus bonus, Timer timer1, Timer timer2, Action<PictureBox[,]> RandBonus)
+        public void HoditUp(Barrier[] barriersArray, Bonus bonus, Timer timer1, Timer timer2, Action<PictureBox[,],Bot> RandBonus, Bot bot)
         {
             bool hodit = true;
             foreach (var item in barriersArray)
@@ -190,7 +190,7 @@ namespace GameProgramm_v_1._0
                 }
                 if (counter == 6)
                 {
-                    RandBonus(pictureBoxes);
+                    RandBonus(pictureBoxes, bot);
                     counter = 0;
                 }
             }

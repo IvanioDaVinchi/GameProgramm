@@ -14,9 +14,8 @@ namespace GameProgramm_v_1._0
         Barrier[] barriersArray;
         Bonus bonus = new Bonus();
         Random random = new Random();
-        Bot Bot= new Bot();
+        Bot Bot = new Bot();
         Bomb bomb;
-        Bot bot;
 
         public Level3()
         {
@@ -25,10 +24,11 @@ namespace GameProgramm_v_1._0
             SetAllPictures("пчел");
             SetAllPrep(pictureBoxes);
             character = new Character(pictureBoxes);
-            bot.SetValues(pictureBoxes);
+            Bot.SetValues(pictureBoxes);
             bomb = new Bomb(pictureBoxes);
-            timer3.Interval = BombSetings.timeExplode*1000;
+            timer3.Interval = BombSetings.timeExplode * 1000;
             timer4.Interval = Level3Class.Time;
+            timer4.Start();
             timer1.Start();
             timer3.Start();
         }
@@ -85,14 +85,16 @@ namespace GameProgramm_v_1._0
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            bot.Move(character.col, barriersArray);
-            if (bot.col == character.col && bot.row == character.row)
+            Bot.Move(character.col, barriersArray);
+            if (Bot.col == character.col && Bot.row == character.row)
             {
                 character.Dead(Bot);
                 if (character.life == 0)
                 {
                     MessageBox.Show("Вы проиграли");
                     this.Close();
+                    MainForm mainForm = new MainForm();
+                    mainForm.Show();
                 }
             }
         }
@@ -103,7 +105,7 @@ namespace GameProgramm_v_1._0
             timer2.Stop();
         }
 
-        private void RandBonus(PictureBox[,] pictureBoxes)
+        private void RandBonus(PictureBox[,] pictureBoxes, Bot bot)
         {
             if (bonus.exist == false)
             {
@@ -148,26 +150,26 @@ namespace GameProgramm_v_1._0
             if (char.ToUpper(e.KeyChar) == (char)Keys.D)
             {
 
-                character.HoditRight(barriersArray, bonus, timer1, timer2, RandBonus);
+                character.HoditRight(barriersArray, bonus, timer1, timer2, RandBonus, Bot);
             }
             else
             {
                 if (char.ToUpper(e.KeyChar) == (char)Keys.A)
                 {
-                    character.HoditLeft(barriersArray, bonus, timer1, timer2, RandBonus);
+                    character.HoditLeft(barriersArray, bonus, timer1, timer2, RandBonus, Bot);
                 }
                 else
                 {
                     if (char.ToUpper(e.KeyChar) == (char)Keys.W)
                     {
-                        character.HoditUp(barriersArray, bonus, timer1, timer2, RandBonus);
+                        character.HoditUp(barriersArray, bonus, timer1, timer2, RandBonus, Bot);
                     }
                     else
                     {
                         if (char.ToUpper(e.KeyChar) == (char)Keys.S)
                         {
 
-                            character.HoditDown(barriersArray, bonus, timer1, timer2, RandBonus);
+                            character.HoditDown(barriersArray, bonus, timer1, timer2, RandBonus, Bot);
                         }
                     }
                 }
@@ -199,9 +201,9 @@ namespace GameProgramm_v_1._0
 
         private void timer4_Tick(object sender, EventArgs e)
         {
-                bomb.Explosion(character, Bot);
-                timer4.Stop();
-                timer3.Start();
+            bomb.Explosion(character, Bot);
+            timer4.Stop();
+            timer3.Start();
         }
 
         private void timer5_Tick(object sender, EventArgs e)

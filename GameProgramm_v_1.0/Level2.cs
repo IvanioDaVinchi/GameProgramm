@@ -19,7 +19,6 @@ namespace GameProgramm_v_1._0
         Bonus bonus = new Bonus();
         Bot Bot = new Bot();
         Random random = new Random();
-        Bot bot = new Bot();
         public Level2()
         {
             InitializeComponent();
@@ -28,7 +27,8 @@ namespace GameProgramm_v_1._0
             SetAllPrep(pictureBoxes);
             character = new Character(pictureBoxes);
             Bot.SetValues(pictureBoxes);
-            timer3.Interval = Level2Class.Time;
+            timer3.Interval = Level2Class.Time*1000;
+            timer3.Start();
             timer1.Start();
         }
         private void SetAllPictures(string picName)
@@ -85,7 +85,7 @@ namespace GameProgramm_v_1._0
             
         }
 
-        private void RandBonus(PictureBox[,] pictureBoxes)
+        private void RandBonus(PictureBox[,] pictureBoxes, Bot bot)
         {
             if (bonus.exist == false)
             {
@@ -105,7 +105,7 @@ namespace GameProgramm_v_1._0
                         }
                     }
 
-                    if (bonus.x == bot.row && bonus.y == bot.col)
+                    if (bonus.x == Bot.row && bonus.y == Bot.col)
                     {
                         counter++;
                     }
@@ -130,26 +130,26 @@ namespace GameProgramm_v_1._0
             if (char.ToUpper(e.KeyChar) == (char)Keys.D)
             {
 
-                character.HoditRight(barriersArray, bonus, timer1, timer2, RandBonus);
+                character.HoditRight(barriersArray, bonus, timer1, timer2, RandBonus, Bot);
             }
             else
             {
                 if (char.ToUpper(e.KeyChar) == (char)Keys.A)
                 {
-                    character.HoditLeft(barriersArray, bonus, timer1, timer2, RandBonus);
+                    character.HoditLeft(barriersArray, bonus, timer1, timer2, RandBonus, Bot);
                 }
                 else
                 {
                     if (char.ToUpper(e.KeyChar) == (char)Keys.W)
                     {
-                        character.HoditUp(barriersArray, bonus, timer1, timer2, RandBonus);
+                        character.HoditUp(barriersArray, bonus, timer1, timer2, RandBonus, Bot);
                     }
                     else
                     {
                         if (char.ToUpper(e.KeyChar) == (char)Keys.S)
                         {
 
-                            character.HoditDown(barriersArray, bonus, timer1, timer2, RandBonus);
+                            character.HoditDown(barriersArray, bonus, timer1, timer2, RandBonus, Bot);
                         }
                     }
 
@@ -166,8 +166,8 @@ namespace GameProgramm_v_1._0
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            bot.Move(character.col, barriersArray);
-            if (bot.col == character.col && bot.row == character.row)
+            Bot.Move(character.col, barriersArray);
+            if (Bot.col == character.col && Bot.row == character.row)
             {
                 character.Dead(Bot);
                 if (character.life == 0)
