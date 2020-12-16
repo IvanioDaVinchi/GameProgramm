@@ -97,7 +97,7 @@ namespace GameProgramm_v_1._0
         {
             if(TimeBombTextBox.Text != "")
             {
-                Bomb.TimeExplode = int.Parse(TimeBombTextBox.Text);
+                BombSetings.TimeExplode = int.Parse(TimeBombTextBox.Text);
             }
         }
 

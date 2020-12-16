@@ -110,7 +110,7 @@ namespace GameProgramm_v_1._0
 
                 }
             }
-            if (character.row == 5 && character.col == 5)
+            if (character.row == pictureBoxes.GetLength(0)-1 && character.col == pictureBoxes.GetLength(1) - 1)
             {
                 MessageBox.Show("Поздровляю вы прошли уровень!!!");
                 Level2 level2 = new Level2();

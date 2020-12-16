@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace GameProgramm_v_1._0
 {
@@ -18,6 +14,7 @@ namespace GameProgramm_v_1._0
         Barrier[] barriersArray;
         Bonus bonus = new Bonus();
         Random random = new Random();
+        Bomb bomb;
 
         public Level3()
         {
@@ -27,8 +24,11 @@ namespace GameProgramm_v_1._0
             //SetAllPrep(pictureBoxes);
             character = new Character(pictureBoxes);
             Bot.SetValues(pictureBoxes);
-            //timer1.Start();
+            bomb = new Bomb(pictureBoxes);
+            timer1.Start();
+            timer3.Start();
         }
+
         private void SetAllPictures(string picName)
         {
             for (int i = 0; i < pictureBoxes.GetLength(0); i++)
@@ -39,6 +39,7 @@ namespace GameProgramm_v_1._0
                     pictureBoxes[i, j].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\{picName}.jpg");
                 }
             }
+            pictureBoxes[pictureBoxes.GetLength(0) - 1, pictureBoxes.GetLength(1) - 1].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\exit.jpg");
         }
 
         private void SetAllPrep(PictureBox[,] pictureBox)
@@ -165,12 +166,19 @@ namespace GameProgramm_v_1._0
                             character.HoditDown(barriersArray, bonus, timer1, timer2, RandBonus);
                         }
                     }
-
                 }
             }
-            if (character.row == 5 && character.col == 5)
+            if (character.row == pictureBoxes.GetLength(0) - 1 && character.col == pictureBoxes.GetLength(1) - 1)
             {
                 MessageBox.Show("Поздровляю вы прошли уровень!!!");
+            }
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            if (!bomb.Exist())
+            {
+                bomb.RandomPlace(barriersArray);
             }
         }
     }
