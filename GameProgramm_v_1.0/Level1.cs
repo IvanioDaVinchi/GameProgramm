@@ -13,8 +13,8 @@ namespace GameProgramm_v_1._0
         PictureBox[,] pictureBoxes = new PictureBox[6, 6];
         Barrier[] barriersArray;
         Bonus bonus = new Bonus();
+        Bot Bot = new Bot();
         Random random = new Random();
-        Bot bot = new Bot();
         public Level1()
         {
             InitializeComponent();
@@ -22,7 +22,8 @@ namespace GameProgramm_v_1._0
             SetAllPictures("пчел");
             SetAllPrep(pictureBoxes);
             character = new Character(pictureBoxes);
-            bot.SetValues(pictureBoxes);
+            Bot.SetValues(pictureBoxes);
+            timer3.Interval = Level1Class.Time;
             timer1.Start();
         }
 
@@ -174,7 +175,7 @@ namespace GameProgramm_v_1._0
             bot.Move(character.col, barriersArray);
             if (bot.col == character.col && bot.row == character.row)
             {
-                character.Dead(bot);
+                character.Dead(Bot);
                 if (character.life == 0)
                 {
                     MessageBox.Show("Вы проиграли");
@@ -189,6 +190,14 @@ namespace GameProgramm_v_1._0
         {
             timer1.Start();
             timer2.Stop();
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Время вышло, игра окончена");
+            MainForm form = new MainForm();
+            form.Show();
+            this.Close();
         }
     }
 }

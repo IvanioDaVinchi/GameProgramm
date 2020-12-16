@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace GameProgramm_v_1._0
 {
-     public class Bot
+    public class Bot
     {
          public int col;
          public int row;
@@ -13,6 +13,7 @@ namespace GameProgramm_v_1._0
 
         public void Restart()
         {
+            pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
             col = 0;
             row = pictureBoxes.GetLength(0) - 2;
             pictureBoxes[pictureBoxes.GetLength(0) - 2, 0].Image = Image.FromFile(pathTexture);
