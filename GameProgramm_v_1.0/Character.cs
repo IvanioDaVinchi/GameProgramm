@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -15,14 +11,14 @@ namespace GameProgramm_v_1._0
         private int counter = 0;
         public int col = 0;
         public int row = 0;
-        public int life = 1;
+        public int life = Settings.CountLife;
         PictureBox[,] pictureBoxes;
-        public string PathTexture { get; set; }
+        public string PathTexture { get; set; } = Settings.PathCharacterTexture;
 
         public Character(PictureBox[,] pictureBoxes)
         {
             this.pictureBoxes = pictureBoxes;
-            pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
+            pictureBoxes[row, col].Image = Image.FromFile(PathTexture);
         }
 
         private void Right()
@@ -31,7 +27,7 @@ namespace GameProgramm_v_1._0
             {
                 pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
                 col++;
-                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
+                pictureBoxes[row, col].Image = Image.FromFile(PathTexture);
             }
         }
 
@@ -41,7 +37,7 @@ namespace GameProgramm_v_1._0
             {
                 pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
                 row++;
-                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
+                pictureBoxes[row, col].Image = Image.FromFile(PathTexture);
             }
         }
 
@@ -51,7 +47,7 @@ namespace GameProgramm_v_1._0
             {
                 pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
                 col--;
-                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
+                pictureBoxes[row, col].Image = Image.FromFile(PathTexture);
             }
         }
 
@@ -61,18 +57,18 @@ namespace GameProgramm_v_1._0
             {
                 pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
                 row--;
-                pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
+                pictureBoxes[row, col].Image = Image.FromFile(PathTexture);
             }
         }
 
-        public void Dead()
+        public void Dead(Bot bot)
         {
             life--;
             pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
             row = 0;
             col = 0;
-            pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
-            Bot.Restart();
+            pictureBoxes[row, col].Image = Image.FromFile(PathTexture);
+            bot.Restart();
             MessageBox.Show("Вы умерли.");
         }
 

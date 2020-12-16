@@ -15,15 +15,16 @@ namespace GameProgramm_v_1._0
         Bonus bonus = new Bonus();
         Random random = new Random();
         Bomb bomb;
+        Bot bot;
 
         public Level3()
         {
             InitializeComponent();
             SetMasImage(pictureBoxes);
             SetAllPictures("пчел");
-            //SetAllPrep(pictureBoxes);
+            SetAllPrep(pictureBoxes);
             character = new Character(pictureBoxes);
-            Bot.SetValues(pictureBoxes);
+            bot.SetValues(pictureBoxes);
             bomb = new Bomb(pictureBoxes);
             timer1.Start();
             timer3.Start();
@@ -81,10 +82,10 @@ namespace GameProgramm_v_1._0
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Bot.Move(character.col, barriersArray);
-            if (Bot.col == character.col && Bot.row == character.row)
+            bot.Move(character.col, barriersArray);
+            if (bot.col == character.col && bot.row == character.row)
             {
-                character.Dead();
+                character.Dead(bot);
                 if (character.life == 0)
                 {
                     MessageBox.Show("Вы проиграли");
@@ -119,7 +120,7 @@ namespace GameProgramm_v_1._0
                         }
                     }
 
-                    if (bonus.x == Bot.row && bonus.y == Bot.col)
+                    if (bonus.x == bot.row && bonus.y == bot.col)
                     {
                         counter++;
                     }
@@ -178,7 +179,7 @@ namespace GameProgramm_v_1._0
         {
             if (!bomb.Exist())
             {
-                bomb.RandomPlace(barriersArray);
+                bomb.RandomPlace(barriersArray, bot);
             }
         }
     }

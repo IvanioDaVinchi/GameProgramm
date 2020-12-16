@@ -29,7 +29,7 @@ namespace GameProgramm_v_1._0
         }
 
 
-        public void RandomPlace(Barrier[] barriersArray)
+        public void RandomPlace(Barrier[] barriersArray, Bot bot)
         {
             bool proxod = false;
             int counter = 0;
@@ -47,7 +47,7 @@ namespace GameProgramm_v_1._0
                     }
                 }
 
-                if (x == Bot.row && y == Bot.col)
+                if (x == bot.row && y == bot.col)
                 {
                     counter++;
                 }
