@@ -448,6 +448,7 @@
             this.TimeBombTextBox.Name = "TimeBombTextBox";
             this.TimeBombTextBox.Size = new System.Drawing.Size(121, 20);
             this.TimeBombTextBox.TabIndex = 7;
+            this.TimeBombTextBox.Text = "3";
             // 
             // label18
             // 

@@ -65,14 +65,14 @@ namespace GameProgramm_v_1._0
             }
         }
 
-        public void Dead()
+        public void Dead(Bot bot)
         {
             life--;
             pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
             row = 0;
             col = 0;
             pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\1.jpg");
-            Bot.Restart();
+            bot.Restart();
             MessageBox.Show("Вы умерли.");
         }
 

@@ -14,6 +14,7 @@ namespace GameProgramm_v_1._0
         Barrier[] barriersArray;
         Bonus bonus = new Bonus();
         Random random = new Random();
+        Bot Bot= new Bot();
         Bomb bomb;
 
         public Level3()
@@ -21,10 +22,12 @@ namespace GameProgramm_v_1._0
             InitializeComponent();
             SetMasImage(pictureBoxes);
             SetAllPictures("пчел");
-            //SetAllPrep(pictureBoxes);
+            SetAllPrep(pictureBoxes);
             character = new Character(pictureBoxes);
             Bot.SetValues(pictureBoxes);
             bomb = new Bomb(pictureBoxes);
+            timer3.Interval = BombSetings.timeExplode*1000;
+            timer4.Interval = Level3Class.Time;
             timer1.Start();
             timer3.Start();
         }
@@ -84,7 +87,7 @@ namespace GameProgramm_v_1._0
             Bot.Move(character.col, barriersArray);
             if (Bot.col == character.col && Bot.row == character.row)
             {
-                character.Dead();
+                character.Dead(Bot);
                 if (character.life == 0)
                 {
                     MessageBox.Show("Вы проиграли");
@@ -170,7 +173,10 @@ namespace GameProgramm_v_1._0
             }
             if (character.row == pictureBoxes.GetLength(0) - 1 && character.col == pictureBoxes.GetLength(1) - 1)
             {
-                MessageBox.Show("Поздровляю вы прошли уровень!!!");
+                MessageBox.Show("Поздровляю вы прошли игру!!!");
+                MainForm form = new MainForm();
+                form.Show();
+                this.Close();
             }
         }
 
@@ -178,8 +184,31 @@ namespace GameProgramm_v_1._0
         {
             if (!bomb.Exist())
             {
-                bomb.RandomPlace(barriersArray);
+                bomb.Clear();
+                SetAllPrep(pictureBoxes);
+                pictureBoxes[bonus.x, bonus.y].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bonus.jpg");
+                bomb.RandomPlace(barriersArray, Bot);
             }
+            else
+            {
+                timer4.Start();
+                timer3.Stop();
+            }
+        }
+
+        private void timer4_Tick(object sender, EventArgs e)
+        {
+                bomb.Explosion(character, Bot);
+                timer4.Stop();
+                timer3.Start();
+        }
+
+        private void timer5_Tick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Время вышло, игра окончена");
+            MainForm form = new MainForm();
+            form.Show();
+            this.Close();
         }
     }
 }

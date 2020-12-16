@@ -4,27 +4,28 @@ using System.Windows.Forms;
 
 namespace GameProgramm_v_1._0
 {
-    static public class Bot
+    public class Bot
     {
-        static public int col;
-        static public int row;
-        static PictureBox[,] pictureBoxes;
+        public int col;
+        public int row;
+        PictureBox[,] pictureBoxes;
 
-        static public void Restart()
+        public void Restart()
         {
+            pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
             col = 0;
             row = pictureBoxes.GetLength(0) - 2;
             pictureBoxes[pictureBoxes.GetLength(0) - 2, 0].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
         }
 
-        static public void SetValues(PictureBox[,] pictureBoxes1)
+        public void SetValues(PictureBox[,] pictureBoxes1)
         {
             pictureBoxes = pictureBoxes1;
             row = pictureBoxes.GetLength(0) - 2;
             pictureBoxes[pictureBoxes.GetLength(0) - 2, 0].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
         }
 
-        static public void Move(int playerX, Barrier[] barriers)
+        public void Move(int playerX, Barrier[] barriers)
         {
             bool hodit = true;
 
