@@ -121,24 +121,6 @@ namespace GameProgramm_v_1._0
                 bonus.exist = true;
             }
         }
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            Bot.Move(character.col, barriersArray);
-            if (Bot.col == character.col && Bot.row == character.row)
-            {
-                character.Dead();
-                if (character.life == 0)
-                {
-                    MessageBox.Show("Вы проиграли");
-                    this.Close();
-                }
-            }
-        }
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            timer1.Start();
-            timer2.Stop();
-        }
 
         private void Level2_KeyPress_1(object sender, KeyPressEventArgs e)
         {
@@ -170,10 +152,33 @@ namespace GameProgramm_v_1._0
 
                 }
             }
-            if (character.row == 5 && character.col == 5)
+            if (character.row == 7 && character.col == 7)
             {
                 MessageBox.Show("Поздровляю вы прошли уровень!!!");
+                Level3 level3 = new Level3();
+                level3.Show();
+                this.Hide();
             }
+        }
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            Bot.Move(character.col, barriersArray);
+            if (Bot.col == character.col && Bot.row == character.row)
+            {
+                character.Dead();
+                if (character.life == 0)
+                {
+                    MessageBox.Show("Вы проиграли");
+                    this.Close();
+                }
+            }
+        }
+
+        private void timer2_Tick_1(object sender, EventArgs e)
+        {
+            timer1.Start();
+            timer2.Stop();
         }
     }
 }
