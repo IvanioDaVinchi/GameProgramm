@@ -407,7 +407,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(647, 434);
+            this.ClientSize = new System.Drawing.Size(647, 353);
             this.Controls.Add(this.pictureBox31);
             this.Controls.Add(this.pictureBox32);
             this.Controls.Add(this.pictureBox33);
@@ -446,7 +446,6 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "Level1";
             this.Text = "Level1";
-            this.Load += new System.EventHandler(this.Level1_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Level1_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
