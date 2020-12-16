@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -229,6 +232,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox99)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox100)).BeginInit();
             this.SuspendLayout();
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 5000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // pictureBox1
             // 
@@ -1137,6 +1150,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "Level3";
             this.Text = "Level3";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Level3_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -1242,7 +1256,8 @@
         }
 
         #endregion
-
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;

@@ -81,7 +81,7 @@ namespace GameProgramm_v_1._0
             bool hodit = true;
             foreach (var item in barriersArray)
             {
-                if (col - 1 == item.Y && row == item.X)
+                if (col+1  == item.Y && row == item.X)
                 {
                     hodit = false;
                 }
@@ -143,7 +143,7 @@ namespace GameProgramm_v_1._0
             bool hodit = true;
             foreach (var item in barriersArray)
             {
-                if (col - 1 == item.Y && row == item.X)
+                if (col == item.Y && row+1 == item.X)
                 {
                     hodit = false;
                 }
@@ -174,7 +174,7 @@ namespace GameProgramm_v_1._0
             bool hodit = true;
             foreach (var item in barriersArray)
             {
-                if (col - 1 == item.Y && row == item.X)
+                if (col == item.Y && row-1 == item.X)
                 {
                     hodit = false;
                 }

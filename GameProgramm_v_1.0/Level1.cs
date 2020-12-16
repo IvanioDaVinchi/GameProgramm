@@ -25,15 +25,6 @@ namespace GameProgramm_v_1._0
             timer1.Start();
         }
 
-        private void Level1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
         private void SetAllPictures(string picName)
         {
             for (int i = 0; i < pictureBoxes.GetLength(0); i++)
@@ -44,7 +35,7 @@ namespace GameProgramm_v_1._0
                     pictureBoxes[i, j].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\{picName}.jpg");
                 }
             }
-            pictureBoxes[5, 5].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\exit.jpg");
+            pictureBoxes[pictureBoxes.GetLength(0)-1, pictureBoxes.GetLength(1) - 1].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\exit.jpg");
         }
 
         private void SetAllPrep(PictureBox[,] pictureBox)
