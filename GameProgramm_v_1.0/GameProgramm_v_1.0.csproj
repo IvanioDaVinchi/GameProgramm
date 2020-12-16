@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BombSetings.cs" />
     <Compile Include="Bonus.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Barrier.cs" />

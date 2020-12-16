@@ -29,7 +29,7 @@ namespace GameProgramm_v_1._0
             bool hodit = true;
 
             if (col != playerX)
-
+            {
                 if (col < playerX)
                 {
                     pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\пчел.jpg");
@@ -73,6 +73,7 @@ namespace GameProgramm_v_1._0
                         pictureBoxes[row, col].Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Kartinki\\bot.jpg");
                     }
                 }
+            }
         }
     }
 }
