@@ -24,10 +24,10 @@ namespace GameProgramm_v_1._0
             InitializeComponent();
             SetMasImage(pictureBoxes);
             SetAllPictures("пчел");
-            SetAllPrep(pictureBoxes);
+            //SetAllPrep(pictureBoxes);
             character = new Character(pictureBoxes);
             Bot.SetValues(pictureBoxes);
-            timer1.Start();
+            //timer1.Start();
         }
         private void SetAllPictures(string picName)
         {
